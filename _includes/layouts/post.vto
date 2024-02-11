@@ -1,6 +1,9 @@
 ---
 layout: ./main.vto
 ---
+{{ if readingInfo }}
+<span>📖 {{readingInfo.minutes}} minutes of estimated read time 📖</span>
+{{ /if }}
 {{ if toc.length }}
 <aside id="table-of-contents">
 <h5>Table of Contents</h5>
