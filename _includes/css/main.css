@@ -68,7 +68,7 @@ article > h5::before{
   --accent: #0039a6;
   --accent-hover: #1266e2;
   --accent-text: var(--bg);
-  --code: #d81b60;
+  --code: #006A4E;
   --preformatted: #444;
   --marked: #ffdd33;
   --disabled: #efefef;
@@ -87,7 +87,7 @@ article > h5::before{
     --accent: #7CB9E8;
     --accent-hover: #ffe099;
     --accent-text: var(--bg);
-    --code: #f06292;
+    --code: #ACE1AF;
     --preformatted: #ccc;
     --disabled: #111;
   }
