@@ -21,8 +21,8 @@ const site = lume({
   .use(date())
   .use(favicon())
   .use(sitemap())
-  .use(lightningCss())
-  .use(codeHighlight());
+  .use(codeHighlight())
+  .use(lightningCss());
 
 site.copy("static/fonts", "fonts")
 

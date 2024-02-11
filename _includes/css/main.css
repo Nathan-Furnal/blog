@@ -118,7 +118,7 @@ progress {
 
 html {
   /* Set the font globally */
-  font-family: "IBM Plex Serif", serif;
+  font-family: "IBM Plex Serif", Garamond, serif;
   scroll-behavior: smooth;
 }
 
@@ -676,7 +676,7 @@ pre,
 pre span,
 kbd,
 samp {
-  font-family: var(--mono-font);
+  font-family: var(--mono-font), 'Courier New', Courier, monospace;
   color: var(--code);
 }
 
