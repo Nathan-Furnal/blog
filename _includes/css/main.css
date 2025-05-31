@@ -52,7 +52,8 @@ article > h5::before{
 }
 
 /* Global variables. */
-:root {
+:root,
+::backdrop {
 
   /* Set sans-serif & mono fonts */
   --mono-font: "IBM Plex Mono";
@@ -76,7 +77,8 @@ article > h5::before{
 /* Dark theme */
 @media (prefers-color-scheme: dark) {
 
-  :root {
+  :root,
+  ::backdrop {
     color-scheme: dark;
     --bg: #212121;
     --accent-bg: #2b2b2b;
@@ -261,7 +263,8 @@ a.button,
 /* extra specificity to override a */
 input[type="submit"],
 input[type="reset"],
-input[type="button"]{
+input[type="button"],
+label[type="button"] {
   border: 1px solid var(--accent);
   background-color: var(--accent);
   color: var(--accent-text);
@@ -296,7 +299,8 @@ button:enabled:hover,
 .button:not([aria-disabled="true"]):hover,
 input[type="submit"]:enabled:hover,
 input[type="reset"]:enabled:hover,
-input[type="button"]:enabled:hover{
+input[type="button"]:enabled:hover,
+label[type="button"]:hover {
   background-color: var(--accent-hover);
   border-color: var(--accent-hover);
   cursor: pointer;
@@ -351,8 +355,7 @@ header>nav a:visited {
 
 header>nav a:hover,
 header>nav a.current,
-header > nav a[aria-current="page"],
-header > nav a[aria-current="true"] {
+header>nav a[aria-current="page"] {
   border-color: var(--accent);
   color: var(--accent);
   cursor: pointer;
@@ -405,16 +408,13 @@ article,
 fieldset,
 dialog {
   /* border: 1px solid var(--border); */
-  background-color: var(--bg);  
   padding: 1rem;
   border-radius: var(--standard-border-radius);
   margin-bottom: 1rem;
 }
 
 article h2:first-child,
-section h2:first-child,
-article h3:first-child,
-section h3:first-child {
+section h2:first-child {
   margin-top: 1rem;
 }
 
@@ -467,9 +467,8 @@ table {
   margin: 1.5rem 0;
 }
 
-figure > table {
+figure>table {
   width: max-content;
-  margin: 0;
 }
 
 td,
