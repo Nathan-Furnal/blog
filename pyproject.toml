@@ -1,0 +1,38 @@
+[project]
+name = "blog"
+description = "Nathan's blog."
+readme = "README.rst"
+
+authors = [ { name = "Nathan Furnal" } ]
+requires-python = ">=3.13"
+classifiers = [
+  # See: https://pypi.org/classifiers/
+  "Intended Audience :: Developers",
+  "Intended Audience :: Education",
+  "Intended Audience :: System Administrators",
+  "Natural Language :: English",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Software Development",
+  "Topic :: Text Editors :: Emacs",
+]
+
+dynamic = [ "version" ]
+
+dependencies = [
+  "furo>=2024.8.6",
+  "sphinx>=8.2.3",
+]
+
+urls.Homepage = "www.nathanfurnal.xyz"
+urls.Repository = "https://github.com/Nathan-Furnal/blog.git"
+
+[dependency-groups]
+dev = [
+  "pre-commit>=4.2",
+]
+
+[tool.pyproject-fmt]
+indent = 2
