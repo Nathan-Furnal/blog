@@ -33,5 +33,27 @@ dev = [
   "sphinx-autobuild>=2024.10.3",
 ]
 
+[tool.ruff]
+line-length = 88
+indent-width = 4
+
+lint.select = [ "ALL" ]
+lint.ignore = [
+  "COM812", # Missing trailing comma
+  "D100",   # Missing docstring in public module
+  "D101",   # Missing docstring in public class
+  "D103",   # Missing docstring in public function
+  "D203",   # No blank line before class docstring
+  "D213",   # No blank line for docstring first line
+]
+lint.per-file-ignores."tests/**" = [
+  "ANN201", # Don't annotate type for tests
+  "INP001", # Tests are not an implicit pkg
+  "S101",   # Assertions are valid in tests
+]
+
 [tool.pyproject-fmt]
 indent = 2
+
+[tool.pytest.ini_options]
+testpaths = [ "tests" ]
