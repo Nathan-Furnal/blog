@@ -1,8 +1,9 @@
 [project]
 name = "blog"
+version = "2025.06.07"
+
 description = "Nathan's blog."
 readme = "README.rst"
-
 authors = [ { name = "Nathan Furnal" } ]
 requires-python = ">=3.13"
 classifiers = [
@@ -19,19 +20,17 @@ classifiers = [
   "Topic :: Text Editors :: Emacs",
 ]
 
-dynamic = [ "version" ]
-
 dependencies = [
-  "furo>=2024.8.6",
   "sphinx>=8.2.3",
 ]
 
-urls.Homepage = "www.nathanfurnal.xyz"
+urls.Homepage = "www.natfu.be"
 urls.Repository = "https://github.com/Nathan-Furnal/blog.git"
 
 [dependency-groups]
 dev = [
   "pre-commit>=4.2",
+  "sphinx-autobuild>=2024.10.3",
 ]
 
 [tool.pyproject-fmt]
