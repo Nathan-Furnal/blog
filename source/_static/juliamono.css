@@ -1,0 +1,111 @@
+/* Julia Mono Light */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-Light.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 300;
+}
+
+/* Julia Mono Light Italic */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-LightItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 300;
+}
+
+/* Julia Mono Regular */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-Regular.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* Julia Mono Regular Italic */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-RegularItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* Julia Mono Medium */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-Medium.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* Julia Mono Medium Italic */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-MediumItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* Julia Mono Semi Bold */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-SemiBold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 600;
+}
+
+/* Julia Mono Semi Bold Italic */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-SemiBoldItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 600;
+}
+
+/* Julia Mono Bold */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-Bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 700;
+}
+
+/* Julia Mono Bold Italic */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-BoldItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 700;
+}
+
+/* Julia Mono Extra Bold */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-ExtraBold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 800;
+}
+
+/* Julia Mono Extra Bold Italic */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-ExtraBoldItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 800;
+}
+
+/* Julia Mono Black */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-Black.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 900;
+}
+
+/* Julia Mono Black Italic */
+@font-face {
+    font-family: 'Julia Mono';
+    src: url('fonts/JuliaMono-BlackItalic.woff2') format('woff2');
+    font-style: italic;
+    font-weight: 900;
+}

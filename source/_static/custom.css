@@ -1,0 +1,17 @@
+.highlight .hll {
+    background-color: #fff576;  /* Light mode default */
+}
+
+[data-theme="dark"] .highlight .hll {
+    background-color: #4a4000 !important;  /* Dark mode */
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-theme="auto"] .highlight .hll {
+        background-color: #4a4000 !important;
+    }
+}
+
+[data-theme="light"] .highlight .hll {
+    background-color: #fff576;  /* Explicit light mode */
+}
