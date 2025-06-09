@@ -1,4 +1,4 @@
-from typing import ClassVar
+from typing import final
 
 from pygments.style import Style
 from pygments.token import (
@@ -14,11 +14,11 @@ from pygments.token import (
     Punctuation,
     String,
     Text,
-    Token,
     Whitespace,
 )
 
 
+@final
 class ModusOperandiStyle(Style):
     """Modus Operandi (light) style for Pygments.
 
@@ -31,7 +31,7 @@ class ModusOperandiStyle(Style):
     background_color = "#f3f3fd"  # light lavender
     default_style = "#000000"  # fg-main
 
-    styles: ClassVar[dict[Token, str]] = {
+    styles = {  # noqa: RUF012
         # Base tokens
         Text: "#000000",  # fg-main
         Whitespace: "#000000",  # fg-main
@@ -121,6 +121,7 @@ class ModusOperandiStyle(Style):
     }
 
 
+@final
 class ModusVivendiStyle(Style):
     """Modus Vivendi (dark) style for Pygments.
 
@@ -133,7 +134,7 @@ class ModusVivendiStyle(Style):
     background_color = "#2e2e3f"  # dark lavender
     default_style = "#ffffff"  # fg-main
 
-    styles: ClassVar[dict[Token, str]] = {
+    styles = {  # noqa: RUF012
         # Base tokens
         Text: "#ffffff",  # fg-main
         Whitespace: "#ffffff",  # fg-main
