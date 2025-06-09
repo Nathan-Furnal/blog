@@ -1,7 +1,11 @@
 import sys
 from pathlib import Path
 
+# Add the custom styling to the path
 sys.path.append(Path(__file__).parent.resolve().as_posix())
+
+# Add the custom extensions to the path
+sys.path.append(str(Path("_ext").resolve()))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -26,9 +30,7 @@ today_fmt = "%Y-%m-%d"
 
 pygments_style = "style.ModusOperandiStyle"
 pygments_dark_style = "style.ModusVivendiStyle"
-html_title = (
-    "Gribouillis <p style='font-size:0.65em;'><em>small mindless sketch</em></p>"
-)
+html_title = "Gribouillis <p style='font-size:0.65em;'><em>small mindless sketch</em></p>"
 html_theme = "furo"
 html_static_path = ["_static"]
 html_css_files = ["luciole.css", "juliamono.css", "custom.css"]
