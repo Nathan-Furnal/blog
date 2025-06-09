@@ -27,7 +27,7 @@ dependencies = [
   "sphinx-copybutton>=0.5.2",
 ]
 
-urls.Homepage = "www.natfu.be"
+urls.Homepage = "https://www.natfu.be"
 urls.Repository = "https://github.com/Nathan-Furnal/blog.git"
 
 [dependency-groups]
@@ -64,3 +64,12 @@ indent = 2
 
 [tool.pytest.ini_options]
 testpaths = [ "tests" ]
+
+[tool.basedpyright]
+include = [ "source" ]
+exclude = [
+  "**/node_modules",
+  "**/__pycache__",
+  "src/experimental",
+  "src/typestubs",
+]
