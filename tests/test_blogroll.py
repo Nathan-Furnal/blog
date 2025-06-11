@@ -12,7 +12,7 @@ from source._ext.blogroll import BlogPost
         (
             Path("20250124==testsig--my-test-title__test_file.rst"),
             BlogPost(
-                date=datetime(2025, 1, 24, tzinfo=UTC),
+                time=datetime(2025, 1, 24, tzinfo=UTC),
                 signature="testsig",
                 title="my-test-title",
                 keywords=("test", "file"),
@@ -22,7 +22,7 @@ from source._ext.blogroll import BlogPost
         (
             Path("20250124--my-test-title__test_file.md"),
             BlogPost(
-                date=datetime(2025, 1, 24, tzinfo=UTC),
+                time=datetime(2025, 1, 24, tzinfo=UTC),
                 signature=None,
                 title="my-test-title",
                 keywords=("test", "file"),
@@ -32,7 +32,7 @@ from source._ext.blogroll import BlogPost
         (
             Path("19991111==ab--title__testing.txt"),
             BlogPost(
-                date=datetime(1999, 11, 11, tzinfo=UTC),
+                time=datetime(1999, 11, 11, tzinfo=UTC),
                 signature="ab",
                 title="title",
                 keywords=("testing",),

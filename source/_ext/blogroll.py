@@ -21,7 +21,9 @@ from pathlib import Path
 from typing import Self, final, override
 
 from docutils import nodes
+from sphinx.application import Sphinx
 from sphinx.util.docutils import SphinxDirective
+from sphinx.util.typing import ExtensionMetadata
 
 PAT = re.compile(
     # %Y%m%d date     optional signature         title                           keywords
@@ -35,11 +37,34 @@ SEPARATORS: tuple[str, ...] = ("==", "--", "__", ".")
 
 @dataclass(frozen=True)
 class BlogPost:
-    date: datetime
+    time: datetime
     signature: str | None
     title: str
     keywords: tuple[str, ...]
     extension: str
+
+    @property
+    def display_title(self) -> str:
+        """Create the display title.
+
+        Returns
+        -------
+        str
+            Titled, space separated string.
+        """
+        first, *rest = self.title.split("-")
+        return f"{first.title()} {' '.join(elem for elem in rest)}"
+
+    @property
+    def isoformat_date(self) -> str:
+        """Return the ISO formatted string of the date.
+
+        Returns
+        -------
+        str
+            ISO formatted date string.
+        """
+        return self.time.date().isoformat()
 
     @classmethod
     def from_fp(cls: type[Self], fp: Path) -> Self:
@@ -71,19 +96,56 @@ class BlogPost:
         if rematch is None:
             msg = f"Invalid file path: {fp!s}"
             raise ValueError(msg)
-        date: datetime = datetime.strptime(rematch.group("date"), "%Y%m%d").replace(tzinfo=UTC)
+        time: datetime = datetime.strptime(rematch.group("date"), "%Y%m%d").replace(tzinfo=UTC)
         sig: str | None = rematch.group("sig")
         title: str = rematch.group("title")
         keywords: tuple[str, ...] = tuple(rematch.group("keywords").split("_"))
         extension: str = fp.suffix
-        return cls(date=date, signature=sig, title=title, keywords=keywords, extension=extension)
+        return cls(time=time, signature=sig, title=title, keywords=keywords, extension=extension)
 
 
 @final
 class BlogRollDirective(SphinxDirective):
+    # No content on the body, it's just displaying existing posts
+    has_content = False
     # The path of the posts dir
     required_arguments = 1
 
     @override
     def run(self) -> Sequence[nodes.Node]:
-        return super().run()
+        post_nodes = nodes.paragraph()
+        dirpath = self.arguments[0]
+        post_dir = Path(self.env.srcdir).resolve() / dirpath
+        paths = [p.relative_to(post_dir) for p in post_dir.glob("*.rst")]
+        posts = sorted(
+            (BlogPost.from_fp(fp) for fp in paths),
+            key=lambda bp: bp.time,
+            reverse=True,
+        )
+
+        for path, post in zip(paths, posts, strict=True):
+            para = nodes.paragraph()
+            para.append(nodes.Text(f"{post.isoformat_date} - "))
+            link = nodes.reference()
+            link["refuri"] = f"{dirpath}/{path.with_suffix('.html')}"
+            link.append(nodes.Text(post.display_title))
+
+            para.append(link)
+            para.append(nodes.Text("\u00a0\u00a0\u00a0\u00a0"))
+            para.append(nodes.Text(f"@{' @'.join(post.keywords)}"))
+            post_nodes.append(para)
+
+        if not posts:
+            post_nodes.append(nodes.Text("No blog posts..."))
+
+        return [post_nodes]
+
+
+def setup(app: Sphinx) -> ExtensionMetadata:
+    app.add_directive("blogroll", BlogRollDirective)
+
+    return {
+        "version": "0.1.0",
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }

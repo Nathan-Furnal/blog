@@ -34,7 +34,13 @@ urls.Repository = "https://github.com/Nathan-Furnal/blog.git"
 dev = [
   "pre-commit>=4.2",
   "sphinx-autobuild>=2024.10.3",
+  { include-group = "lint" },
+  { include-group = "test" },
 ]
+test = [
+  "pytest>=8.4",
+]
+
 lint = [
   "basedpyright>=1.29.2",
   "ruff>=0.11.13",
