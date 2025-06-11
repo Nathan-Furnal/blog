@@ -82,3 +82,7 @@ exclude = [
   "src/experimental",
   "src/typestubs",
 ]
+
+[tool.rstcheck]
+# Ignore custom directive
+ignore_directives = [ "blogroll" ]

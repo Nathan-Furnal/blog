@@ -18,12 +18,13 @@ version = "2025.06.02"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["sphinx.ext.duration", "sphinx.ext.githubpages", "sphinx_copybutton"]
+extensions = ["sphinx.ext.duration", "sphinx.ext.githubpages", "sphinx_copybutton", "blogroll"]
 
 templates_path = ["_templates"]
 exclude_patterns = []
 today_fmt = "%Y-%m-%d"
 
+suppress_warnings = ["toc.not_readable"]
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -31,6 +32,7 @@ today_fmt = "%Y-%m-%d"
 pygments_style = "style.ModusOperandiStyle"
 pygments_dark_style = "style.ModusVivendiStyle"
 html_title = "Gribouillis <p style='font-size:0.65em;'><em>small mindless sketch</em></p>"
+html_show_sourcelink = False
 html_theme = "furo"
 html_static_path = ["_static"]
 html_css_files = ["luciole.css", "juliamono.css", "custom.css"]
@@ -41,7 +43,7 @@ html_theme_options = {
         # Dark mode inherits fonts from light mode, only set it once
         "font-stack": "Luciole, sans-serif",
         "font-stack--monospace": "Julia Mono, monospace",
-        "font-stack--headings": "Luciole, serif",
+        "font-stack--headings": "Luciole, sans-serif",
         # Main brand colors
         "color-brand-primary": "#0031a9",  # blue
         "color-brand-content": "#0031a9",  # blue
