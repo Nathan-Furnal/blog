@@ -39,6 +39,16 @@ from source._ext.blogroll import BlogPost
                 extension=".txt",
             ),
         ),
+        (
+            Path("20230131==c--some-title-here__context_efficientTesting.txt"),
+            BlogPost(
+                time=datetime(2023, 1, 31, tzinfo=UTC),
+                signature="c",
+                title="some-title-here",
+                keywords=("context", "efficientTesting"),
+                extension=".txt",
+            ),
+        ),
     ],
 )
 def test_blogpost_can_be_created_from_path(fp: Path, blog_post: BlogPost):

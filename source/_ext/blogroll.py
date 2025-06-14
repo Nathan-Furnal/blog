@@ -26,8 +26,14 @@ from sphinx.util.docutils import SphinxDirective
 from sphinx.util.typing import ExtensionMetadata
 
 PAT = re.compile(
-    # %Y%m%d date     optional signature         title                           keywords
-    r"(?P<date>\d{8})(?:==(?P<sig>[a-z0-9]+))?--(?P<title>[a-z0-9][a-z0-9\-]+)__(?P<keywords>[a-z0-9][a-z0-9_]+)\."
+    # %Y%m%d date
+    r"(?P<date>\d{8})"
+    # optional signature
+    + r"(?:==(?P<sig>[a-z0-9]+))?"
+    # title
+    + r"--(?P<title>[a-z0-9][a-z0-9\-]+)"
+    # keywords: must start with a lowercase letter but allows uppercase in the word
+    + r"__(?P<keywords>[a-z0-9][a-zA-Z0-9]*(?:_[a-z][a-zA-Z0-9]*)*)\."
 )
 
 # Dot separator may appear multiple times for some files like `.tar.gz` or `.txt.zip`
