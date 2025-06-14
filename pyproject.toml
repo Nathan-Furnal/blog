@@ -32,6 +32,8 @@ urls.Repository = "https://github.com/Nathan-Furnal/blog.git"
 
 [dependency-groups]
 dev = [
+  "doc8>=2",
+  "esbonio>=0.16.5",
   "pre-commit>=4.2",
   "sphinx-autobuild>=2024.10.3",
   { include-group = "lint" },
@@ -60,6 +62,7 @@ lint.ignore = [
   "D213",   # No blank line for docstring first line
   "D413",   # Annoying blank line rule
   "INP001", # No implicit pkg warning
+  "ISC003", # Don't allow implicit string concat
 ]
 lint.per-file-ignores."tests/**" = [
   "ANN201", # Don't annotate type for tests
@@ -86,3 +89,11 @@ exclude = [
 [tool.rstcheck]
 # Ignore custom directive
 ignore_directives = [ "blogroll" ]
+
+[tool.doc8]
+max-line-length = 120
+allow-long-titles = true
+
+[tool.esbonio.sphinx]
+buildCommand = [ "sphinx-build", "-M", "dirhtml", ".", "./_build" ]
+pythonCommand = [ "${venv:.venv}" ]

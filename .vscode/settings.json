@@ -1,0 +1,6 @@
+{
+  "restructuredtext.linter.doc8.extraArgs": [
+    "--config",
+    "${workspaceFolder}/pyproject.toml"
+  ]
+}
