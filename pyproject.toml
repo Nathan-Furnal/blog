@@ -21,10 +21,7 @@ classifiers = [
 ]
 
 dependencies = [
-  "furo>=2024.8.6",
-  "pygments>=2.19.1",
-  "sphinx>=8.2.3",
-  "sphinx-copybutton>=0.5.2",
+  "pelican[markdown]>=4.11",
 ]
 
 urls.Homepage = "https://www.natfu.be"
@@ -32,10 +29,7 @@ urls.Repository = "https://github.com/Nathan-Furnal/blog.git"
 
 [dependency-groups]
 dev = [
-  "doc8>=2",
-  "esbonio>=0.16.5",
   "pre-commit>=4.2",
-  "sphinx-autobuild>=2024.10.3",
   { include-group = "lint" },
   { include-group = "test" },
 ]
@@ -85,15 +79,3 @@ exclude = [
   "src/experimental",
   "src/typestubs",
 ]
-
-[tool.rstcheck]
-# Ignore custom directive
-ignore_directives = [ "blogroll" ]
-
-[tool.doc8]
-max-line-length = 120
-allow-long-titles = true
-
-[tool.esbonio.sphinx]
-buildCommand = [ "sphinx-build", "-M", "dirhtml", ".", "./_build" ]
-pythonCommand = [ "${venv:.venv}" ]
