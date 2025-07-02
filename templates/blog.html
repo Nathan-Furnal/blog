@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  {{ section.title }}
+</h1>
+  {% for page in section.pages %}
+  <p class="text-bigger">
+    <a href="{{ page.permalink | safe }}">{{ page.date }} - {{ page.title }}</a>
+  </p>
+  {% endfor %}
+{% endblock content %}

@@ -1,16 +1,31 @@
 # The URL the site will be built for
 base_url = "https://blog.natfu.be"
 
-# Whether to automatically compile all Sass files in the sass directory
-compile_sass = true
-
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
+
+# RSS/Atom feeds
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+
+# General
+title = "Gribouillis"
+description = "Mindless sketches ✐ᝰ"
+author = "Nathan Furnal"
 
 [markdown]
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = true
+highlight_theme = "css"
+highlight_themes_css = [
+  { theme = "dracula", filename = "css/syntax-theme-dark.css" },
+  { theme = "inspired-github", filename = "css/syntax-theme-light.css" },
+]
+
+# Whether external links are to be opened in a new tab
+# If this is true, a `rel="noopener"` will always automatically be added for security reasons
+external_links_target_blank = true
 
 [extra]
 # Put all your custom variables here

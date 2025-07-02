@@ -1,17 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ config.default_language | default(value="en") }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-  <meta charset="utf-8">
-  <title>MyBlog</title>
-</head>
-
-<body>
-  <section class="section">
-    <div class="container">
+      <!-- Title handling -->
+    <title>
+      {%- if page.title -%}
+            {{ page.title }} | {{ config.title }}
+        {%- elif section.title -%}
+            {{ section.title }} | {{ config.title }}
+        {%- else -%}
+            {{ config.title }}
+        {%- endif -%}
+    </title>
+    <!-- Meta description -->
+    <meta name="description" content="
+        {%- if page.description -%}
+            {{ page.description }}
+        {%- elif section.description -%}
+            {{ section.description }}
+        {%- else -%}
+            {{ config.description }}
+        {%- endif -%}
+    ">
+    <link rel="stylesheet" href="{{ get_url(path="css/main.css") }}">
+  <link rel="stylesheet" type="text/css" href="{{ get_url(path="css/syntax-theme-dark.css") }}" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" type="text/css" href="{{ get_url(path="css/syntax-theme-light.css") }}" media="(prefers-color-scheme: light)" />
+      <!-- RSS Feed -->
+      {% if config.generate_feed %}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
+      {% endif %}
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">Posts</a>
+        <a href="https://github.com/Nathan-Furnal">Github</a>
+      </nav>
+      <h1>{{ config.title }}</h1>
+      <p>{{ config.description }}</p>
+    </header>
+    <main>
       {% block content %} {% endblock content %}
-    </div>
-  </section>
-</body>
-
+      </main>
+    <footer>
+      Nathan Furnal © 2025
+    </footer>
+  </body>
 </html>
