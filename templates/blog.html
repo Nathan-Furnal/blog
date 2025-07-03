@@ -5,8 +5,10 @@
   {{ section.title }}
 </h1>
   {% for page in section.pages %}
-  <p class="text-bigger">
+    {% if not page.draft and not page.extra.exclude_from_blog %}
+  <p class="font-1.3rem">
     <a href="{{ page.permalink | safe }}">{{ page.date }} - {{ page.title }}</a>
   </p>
+    {% endif %}
   {% endfor %}
 {% endblock content %}

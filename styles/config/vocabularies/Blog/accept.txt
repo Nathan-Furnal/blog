@@ -5,3 +5,6 @@ filepath
 pathname
 DB
 unittest
+Whoami
+Github
+Gitlab

@@ -34,14 +34,20 @@
   </head>
   <body>
     <header>
-      <nav>
-        <a href="/">Posts</a>
-        <a href="https://github.com/Nathan-Furnal">Github</a>
-      </nav>
-      <h1>{{ config.title }}</h1>
-      <p>{{ config.description }}</p>
+      <div class="nav-container">
+        <div class="nav-heading">
+          <div class="font-3rem">{{ config.title }}</div>
+          <p>{{ config.description }}</p>
+        </div>
+        <div class="nav-content">
+          <nav>
+            <a href="{{ get_url(path="/") }}">Posts</a>
+            <a href="{{ get_url(path="/about/") }}">About</a>
+          </nav>
+        </div>
+      </div>
     </header>
-    <main>
+    <main role="main">
       {% block content %} {% endblock content %}
       </main>
     <footer>

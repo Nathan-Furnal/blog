@@ -4,6 +4,17 @@
 <h1 class="title">
   {{ page.title }}
 </h1>
-<p class="subtitle"><strong>{{ page.date }}</strong></p>
+    <div class="post-meta">
+      <time class="published" datetime="{{ page.date | date(format='%Y-%m-%d') }}">
+        Published: {{ page.date | date(format="%B %d, %Y") }}
+      </time>
+
+      {% if page.updated %}
+      <time class="updated" datetime="{{ page.updated | date(format='%Y-%m-%d') }}">
+        Updated: {{ page.updated | date(format="%B %d, %Y") }}
+      </time>
+      {% endif %}
+    </div>
+<hr class="separator">
 {{ page.content | safe }}
 {% endblock content %}
