@@ -8,3 +8,4 @@ unittest
 Whoami
 Github
 Gitlab
+pydantic
