@@ -9,3 +9,5 @@ Whoami
 Github
 Gitlab
 pydantic
+FastAPI
+SQLAlchemy

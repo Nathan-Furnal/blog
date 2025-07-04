@@ -85,7 +85,7 @@ Colors: https://protesilaos.com/emacs/modus-themes-colors
     --accent-text: var(--bg);
     --code: #8a290f;
     --preformatted: #444;
-    --marked: #ffdd33;
+    --marked: #fff576;
     --disabled: #efefef;
 }
 
@@ -102,6 +102,7 @@ Colors: https://protesilaos.com/emacs/modus-themes-colors
       --accent-hover: #b6a0ff;
       --accent-text: var(--bg);
       --code: #db7b5f;
+      --marked: #4a4000;
       --preformatted: #ccc;
       --disabled: #111;
   }
