@@ -4,7 +4,6 @@ slug = "managing-settings-in-python-projects"
 date = 2025-07-05
 tags = ["python", "softwareDesign"]
 categories = ["guide"]
-
 +++
 
 ## Motivation
