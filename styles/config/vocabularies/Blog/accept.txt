@@ -11,3 +11,5 @@ Gitlab
 pydantic
 FastAPI
 SQLAlchemy
+breakpoint
+config

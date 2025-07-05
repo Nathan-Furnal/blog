@@ -4,7 +4,7 @@ slug = "managing-settings-in-python-projects"
 date = 2025-07-05
 tags = ["python", "softwareDesign"]
 categories = ["guide"]
-draft = true
+
 +++
 
 ## Motivation
@@ -55,8 +55,8 @@ that bundles all configurations is fine.
 
 Let's go with an example now, where I'll setup the [connection to a DB with
 SQLAlchemy](https://docs.sqlalchemy.org/en/20/core/engines.html#engine-configuration),
-with a more legwork with a `Secret` type, which isn't safe by any means but
-won't default to printing the value of the secret.
+with a bit more legwork in order to build a `Secret` type, which isn't safe by
+any means but won't default to printing the value of the secret.
 
 In a `config.py`, there's now:
 
@@ -158,12 +158,17 @@ We'll want to be able to read files and generate a settings object straight from
 `.env` file, I've made some choices about how to read the file: only accepting prefixed
 variables and ignoring extraneous variables.
 
-Here's the abridged version of the `DBSettings` object with a new prefix highlighted
-as well as a couple tools annotations since they are static analysis tools and I am
-relying on dynamic typing by fetching the types of the fields straight from the class
-definition.
+Here's the abridged version of the `DBSettings` object with a new prefix as well
+as a couple tools annotations since they are static analysis tools and I am
+relying on dynamic typing by fetching the types of the fields straight from the
+class definition.
 
 ```python
+from dataclasses import dataclass, fields
+from pathlib import Path
+from typing import ClassVar, Self, final, override
+
+
 @dataclass(frozen=True, kw_only=True)
 class DBSettings:
     env_prefix: ClassVar[str] = "DB_"
@@ -198,13 +203,95 @@ class DBSettings:
 I think this is a decently useful implementation which can be extended or copied
 for anyone's needs.
 
+## On testing and debugging
+
+Thanks to the approach outlined above, creating test specific settings becomes
+only a matter of creating a settings object with a testing configuration. This
+lowers the bar for testing and shortens the feedback loop when changing the
+configuration and re-running the tests.
+
+When you're debugging, it only becomes a matter of setting a breakpoint or
+reading the logs, to access the state of your application defined by the
+settings. You don't need to chase down some global variables, print the whole
+environment or trace back what file accessed some _config_ in what order.
+
+This is true in many more cases than simply settings and configuration objects.
+Any time you can reduce the surface of the code provoking state changes and
+localize the effects of those changes, you should do so, it will pay back
+dividends in clearer and tighter feedback loops.
+
 ## Tools nudging you in the right (and wrong) direction
 
-I'll stand on the shoulders of giants and show some libraries I think do a good job
-showing users how to use settings properly and which are not.
+I'll stand on the shoulders of giants and show some libraries I think do a good
+job showing users how to use settings properly and which are not.
+
+In terms of settings, the web framework FastAPI has a [guide on how to define
+settings](https://fastapi.tiangolo.com/advanced/settings/) which uses
+`pydantic-settings`, mentioned earlier.
+
+SQLAlchemy [also explains how to
+configure](https://docs.sqlalchemy.org/en/20/core/engines.html) its engine and
+connections properly through settings.
+
+In both cases, they nudge you in the right direction since they receive some
+form of settings objects which is passed around the application and you're free
+to define them as you want, most of the time.
+
+When you go into the data science realm though, you often encounter issues both
+for historic and tooling reasons. [Jupyter notebooks](https://jupyter.org/)
+which are really popular for experimenting encourage having everything in one
+notebook and run some cells or all cells when there are some changes to the
+code. As a result, it's frequent for developers to put important variables in
+the environment or in global variables, at the top of the notebook. When the
+code is moved to production, those patterns stay as well and "infect" everything
+with mutable global state.
+
+In my experience, a common frustrating case is when you're dealing with
+[anaconda](https://docs.conda.io/en/latest/) and tools that require to be in the
+front row seat like the job scheduler, [Airflow](https://airflow.apache.org/).
+If you, like me, have an instance of Airflow running on a server with a lot of
+projects, it can be tough. Looking at Airflow's documentation [on its
+configuration](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html)
+as well as [its module
+documentation](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/modules_management.html),
+there is a ton of explanation in how to export environment variables, modify the
+`PYTHONPATH` environment variables, and so on. Being able to use configuration
+files like `airflow.cfg` is great but the fact the documentation is falling back
+on global environment variables isn't. Same for [Airflow
+variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html)
+where the first example includes using environment variables. If you mix bash
+and python, typically when retrieving data and then processing it, you're in for
+a world of hurt. I also mention `conda` because it's typical to activate an
+environment globally for a project to have access to all its executables, in
+tandem with Airflow, the state of your application quickly becomes tough to
+manage.
+
+Now, you can take some steps to alleviate the issues I just mentioned:
+
+- Use files over hard-coded environment variables when possible.
+- Create settings objects and use them in your DAG files (or similar for other
+  tools) as much as possible.
+- Avoid setting variables in the global environment (`os.environ`) and pass down
+  the required data to each class/function/DAG, when needed.
+- Use absolute paths to refer to executables and register them once in a
+  settings object.
+- Conversely, avoid global mutation like `source <file>`, `conda activate`, etc.
 
 ## Code
 
-You can read the [full code and tests] to get a better picture of the final result.
+You can read the [full code and
+tests](https://github.com/Nathan-Furnal/settings-management) to get a better
+picture of the final result.
 
 ## Conclusion
+
+There's little consensus on how to manage settings properly in Python projects,
+but in general you'll want your settings to be local, immutable and act as plain
+data. Python's standard library offers a way to do it with frozen `dataclasses`
+and we can easily add some functionalities to read from configuration files like
+a `.env` file.
+
+Some tools will nudge you in the right direction because they use and document
+settings objects while some other tools make it harder and you need to be more
+vigilant in how you define the configuration and make it accessible to different
+parts of the code.
